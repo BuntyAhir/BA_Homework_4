@@ -22,6 +22,10 @@ group_by(movie_rating, movieID, title, userID) %>% summarize(count = n(), avg_ra
 average_rating <- group_by(movie_rating, movieID, title, userID) %>% summarize(count = n(), avg_rating = mean(rating))
 head(average_rating)
 
+ggplot(data = average_rating, mapping = aes(avg_rating))+geom_histogram(binwidth = 0.5)
+ggplot(data = average_rating, mapping = aes(log1p(count)))+geom_density()
+ggplot(data = average_rating, mapping = aes(log1p(count), avg_rating))+geom_point()
+
 ggplot(data = average_rating, mapping = aes(avg_rating)) + geom_histogram(binwidth = 0.5)
 ggplot(data = average_rating, mapping = aes(count)) + geom_density()
 ggplot(data = rating, mapping = aes(rating)) + geom_density()
